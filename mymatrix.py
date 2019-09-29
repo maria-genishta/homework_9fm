@@ -93,14 +93,14 @@ class MyMatrix:
     def flipped_up_down(self):
         matrix = copy.deepcopy(self.__data)
         new_matrix = self.flip_up_down()
-        new_matrix = copy.deepcopy(self.__data)
+        new_matrix = MyMatrix(copy.deepcopy(self.__data))
         self.__data = matrix
         return new_matrix 
         
     def flipped_left_right(self):
        matrix_ = copy.deepcopy(self.__data)
        new_matrix = self.flip_left_right()
-       new_matrix = copy.deepcopy(self.__data)
+       new_matrix = MyMatrix(copy.deepcopy(self.__data))
        self.__data = matrix_
        return new_matrix 
         
@@ -131,7 +131,7 @@ class MyMatrix:
         """
         matrix = copy.deepcopy(self.__data)
         new_matrix = self.transpose()
-        new_matrix = copy.deepcopy(self.__data)
+        new_matrix = MyMatrix(copy.deepcopy(self.__data))
         self.__data = matrix
         return new_matrix
 
@@ -139,22 +139,26 @@ class MyMatrix:
         return self.__data
         
     def __add__(self, other):        
-        sum = []
+        sum_matrix = []
         matrix = copy.deepcopy(self.__data) 
+        other = copy.deepcopy(other.get_data())
         for i in range(len(matrix)):
             s = []
             for j in range(len(matrix[i])):
                 s.append(matrix[i][j] + other[i][j])
-            sum.append(s)
-        return sum
+            sum_matrix.append(s)
+        sum_matrix = MyMatrix(copy.deepcopy(sum_matrix))
+        return sum_matrix
 
     def __sub__(self, other):       
         difference = []
+        other = copy.deepcopy(other.get_data())
         for i in range(len(self.__data)):
             s = []
             for j in range(len(self.__data[i])):
                 s.append(self.__data[i][j] - other[i][j])
             difference.append(s)
+        difference = MyMatrix(copy.deepcopy(difference))
         return difference
         
     def __iadd__(self, other):

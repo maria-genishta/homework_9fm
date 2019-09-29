@@ -36,24 +36,24 @@ def test_flipped_up_down():
     new_matrix = matrix.flipped_up_down()
     assert(matrix.get_data() == [[1, 2, 3], [4, 5, 6]])
     assert(matrix.size() == (2, 3))
-    assert(new_matrix == [[4, 5, 6], [1, 2, 3]])
+    assert(new_matrix.get_data() == [[4, 5, 6], [1, 2, 3]])
     empty_matrix = MyMatrix([ ])
     e = empty_matrix.flipped_up_down()
     assert(empty_matrix.get_data() == [])
     assert(empty_matrix.size() == (0,0))
-    assert(e == [])
+    assert(e.get_data() == [])
     
 def test_flipped_left_right():
     matrix = MyMatrix([[1, 2, 3], [4, 5, 6]]) 
     new_matrix = matrix.flipped_left_right()
     assert(matrix.get_data() == [[1, 2, 3], [4, 5, 6]])
     assert(matrix.size() == (2, 3))
-    assert(new_matrix == [[3, 2, 1], [6, 5, 4]])
+    assert(new_matrix.get_data()== [[3, 2, 1], [6, 5, 4]])
     empty_matrix = MyMatrix([ ])
     e = empty_matrix.flipped_left_right()
     assert(empty_matrix.get_data() == [])
     assert(empty_matrix.size() == (0,0))
-    assert(e == [])
+    assert(e.get_data() == [])
 
 def test_transpose():
     data = [[1, 2, 3], [4, 5, 6]]
@@ -70,39 +70,42 @@ def test_transposed():
     data = [[1, 2, 3], [4, 5, 6]]
     matrix = MyMatrix([[1, 2, 3], [4, 5, 6]])
     m = matrix.transposed()
-    assert(m == [[1, 4], [2, 5], [3, 6]])
+    assert(m.get_data() == [[1, 4], [2, 5], [3, 6]])
     assert(matrix.size() == (2, 3))
     assert(matrix.get_data() == data)
     empty_matrix = MyMatrix([])
-    empty_matrix.transposed()
+    e = empty_matrix.transposed()
     assert(empty_matrix.size() == (0, 0))
     assert(empty_matrix.get_data() == [])
-
+    assert(e.get_data() == [])
+    
 def test__sub__():
     matrix = MyMatrix([[1, 2, 3], [4, 5, 6]])
-    other = [[12, 2, 3], [900, 67, 4]]
-    assert(matrix - other == [[-11, 0, 0], [-896, -62, 2]])
+    other = MyMatrix([[12, 2, 3], [900, 67, 4]])
+    m = matrix - other
+    assert(m.get_data() == [[-11, 0, 0], [-896, -62, 2]])
     assert(matrix.get_data() == [[1, 2 ,3], [4, 5, 6]])
-    assert(other == [[12, 2, 3], [900, 67, 4]])
+    assert(other.get_data() == [[12, 2, 3], [900, 67, 4]])
 
 def test__add__():
     matrix = MyMatrix([[1, 2, 3], [4, 5, 6]])
-    other =[[12, 2, 3], [900, 67, 4]]
-    assert(matrix + other == [[13, 4, 6], [904, 72, 10]])
+    other = MyMatrix([[12, 2, 3], [900, 67, 4]])
+    m = matrix + other
+    assert(m.get_data() == [[13, 4, 6], [904, 72, 10]])
     assert(matrix.get_data() == [[1, 2, 3], [4, 5, 6]])
-    assert(other == [[12, 2, 3], [900, 67, 4]])
+    assert(other.get_data() == [[12, 2, 3], [900, 67, 4]])
 
 def test__iadd__():
     matrix = MyMatrix([[1, 2, 3], [4, 5, 6]])
-    other =[[12, 2, 3], [900, 67, 4]]
-    matrix+=other
-    assert(matrix == [[13, 4, 6], [904, 72, 10]])
-    assert(other == [[12, 2, 3], [900, 67, 4]])
+    other = MyMatrix([[12, 2, 3], [900, 67, 4]])
+    matrix += other
+    assert(matrix.get_data() == [[13, 4, 6], [904, 72, 10]])
+    assert(other.get_data() == [[12, 2, 3], [900, 67, 4]])
     
 def test__isub__():
     matrix = MyMatrix([[1, 2, 3], [4, 5, 6]])
-    other = [[12, 2, 3], [900, 67, 4]]
+    other = MyMatrix([[12, 2, 3], [900, 67, 4]])
     matrix -= other 
-    assert(matrix == [[-11, 0, 0], [-896, -62, 2]])
-    assert(other == [[12, 2, 3], [900, 67, 4]])
+    assert(matrix.get_data() == [[-11, 0, 0], [-896, -62, 2]])
+    assert(other.get_data() == [[12, 2, 3], [900, 67, 4]])
 
