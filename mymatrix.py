@@ -91,18 +91,12 @@ class MyMatrix:
     # методы flipped_ по сути делают то же самое,
     # но возвращают изменённую КОПИЮ матрицы
     def flipped_up_down(self):
-        matrix = copy.deepcopy(self.__data)
-        new_matrix = self.flip_up_down()
         new_matrix = MyMatrix(copy.deepcopy(self.__data))
-        self.__data = matrix
-        return new_matrix 
+        return new_matrix.flip_up_down()
         
     def flipped_left_right(self):
-       matrix_ = copy.deepcopy(self.__data)
-       new_matrix = self.flip_left_right()
-       new_matrix = MyMatrix(copy.deepcopy(self.__data))
-       self.__data = matrix_
-       return new_matrix 
+       matrix_copy = MyMatrix(copy.deepcopy(self.__data))
+       return matrix_copy.flip_left_right()
         
     def transpose(self):
         """
@@ -129,14 +123,11 @@ class MyMatrix:
         """
         Return transposed copy of MyMatrix.
         """
-        matrix = copy.deepcopy(self.__data)
-        new_matrix = self.transpose()
         new_matrix = MyMatrix(copy.deepcopy(self.__data))
-        self.__data = matrix
-        return new_matrix
+        return new_matrix.transpose()
 
     def get_data(self):
-        return self.__data
+        return copy.deepcopy(self.__data)
         
     def __add__(self, other):        
         sum_matrix = []
