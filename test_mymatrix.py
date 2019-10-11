@@ -19,7 +19,7 @@ def test_flip_up_down():
      matrix.flip_up_down()
      assert(matrix.size() == (2, 3))
      assert(matrix.get_data() == [[4, 5, 6], [1, 2, 3]])
-     empty_matrix = MyMatrix([])
+     empty_matrix = MyMatrix([ ])
      assert(empty_matrix.get_data() == [ ])
      
 def test_flip_left_right():
@@ -67,12 +67,11 @@ def test_transpose():
     assert(empty_matrix.get_data() == [])
 
 def test_transposed():
-    data = [[1, 2, 3], [4, 5, 6]]
     matrix = MyMatrix([[1, 2, 3], [4, 5, 6]])
     m = matrix.transposed()
     assert(m.get_data() == [[1, 4], [2, 5], [3, 6]])
     assert(matrix.size() == (2, 3))
-    assert(matrix.get_data() == data)
+    assert(matrix.get_data() == [[1, 2, 3], [4, 5, 6]])
     empty_matrix = MyMatrix([])
     e = empty_matrix.transposed()
     assert(empty_matrix.size() == (0, 0))
@@ -108,4 +107,69 @@ def test__isub__():
     matrix -= other 
     assert(matrix.get_data() == [[-11, 0, 0], [-896, -62, 2]])
     assert(other.get_data() == [[12, 2, 3], [900, 67, 4]])
+    
+def test__getitem__():
+    matrix = MyMatrix([[1, 2, 3], [4, 5, 6]])
+    assert(matrix[0][2] == 3)
+    assert(matrix[0, 2] == 3)
+    
+    
+def test__setitem__():
+    matrix = MyMatrix([[1, 2, 3], [4, 5, 6]])
+    matrix[0][1] = 5
+    assert(matrix[0][1] == 5)
+
+def test_rotate_clockwise_90():
+    matrix = MyMatrix([[1, 2, 3], [4, 5, 6]])
+    matrix.rotate_clockwise_90()
+    assert(matrix.get_data() == [[4,1], [5,2], [6, 3]])
+    empty_matrix = MyMatrix([])
+    empty_matrix.rotate_clockwise_90()
+    assert(empty_matrix.get_data() == [ ])
+    
+def test_rotate_counterclockwise_90():
+    matrix = MyMatrix([[1,2, 3], [4, 5, 6]])
+    empty_matrix = MyMatrix( [ ] )
+    matrix.rotate_counterclockwise_90()
+    empty_matrix.rotate_counterclockwise_90()
+    assert(matrix.get_data() == [[3, 6], [2, 5], [1, 4]])
+    assert(empty_matrix.get_data() == [])
+
+def test_rotate_180():
+    matrix = MyMatrix([[1, 2, 3], [4, 5, 6]])
+    empty_matrix = MyMatrix([])
+    matrix.rotate_180()
+    empty_matrix.rotate_180()
+    assert(matrix.get_data() == [[6, 5, 4], [3, 2,1]])
+    assert(empty_matrix.get_data() == [])
+    
+def test_rotated_clockwise_90():
+    matrix = MyMatrix([[1, 2 , 3], [4, 5, 6]])
+    new_matrix = matrix.rotated_clockwise_90()
+    assert(new_matrix.get_data() == [[4,1], [5,2], [6, 3]])
+    assert(matrix.get_data() == [[1, 2, 3], [4, 5, 6]])
+    empty_matrix = MyMatrix( [ ])
+    e = empty_matrix.rotated_clockwise_90()
+    assert(e.get_data() == [])
+    assert(empty_matrix.get_data() == [])
+    
+def test_rotated_counterclockwise_90():
+    matrix = MyMatrix([[1, 2, 3], [4, 5, 6]])
+    new_matrix = matrix.rotated_counterclockwise_90()
+    assert(matrix.get_data() == [[1, 2, 3], [4, 5, 6]])
+    assert(new_matrix.get_data() == [[3, 6], [2, 5], [1, 4]])
+    empty_matrix = MyMatrix( [ ])
+    e = empty_matrix.rotated_counterclockwise_90()
+    assert(e.get_data() == [])
+    assert(empty_matrix.get_data() == [])
+
+def test_rotated_180():
+    matrix = MyMatrix([[1, 2, 3], [4, 5, 6]])
+    new_matrix = matrix.rotated_180()
+    assert(new_matrix.get_data() == [[6, 5, 4], [3, 2, 1]])
+    assert(matrix.get_data() == [[1, 2, 3], [4, 5 ,6]])
+    empty_matrix = MyMatrix( [ ])
+    e = empty_matrix.rotated_180()
+    assert(e.get_data() == [])
+    assert(empty_matrix.get_data() == [])
 

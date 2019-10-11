@@ -159,4 +159,47 @@ class MyMatrix:
     def isub(self, other):
         self = self.__sub__(other)
         return self
-
+        
+    def __getitem__(self, key):
+        print('getitem')
+        print(key)
+        if type(key) == tuple: 
+            elem = self.__data[key[0]][key[1]]
+        elif type(key) == int:
+            elem = self.__data[key]
+        return elem
+        
+    def __setitem__(self, key, value):
+        print('setitem')
+        raise Exception
+        print(key)
+        if type(key) == tuple:
+            self.__data[key[0]][key[1]] = value
+        return self
+        
+    def rotate_clockwise_90(self):
+        matrix = self.transpose()
+        matrix1 = matrix.flip_left_right()
+        return self
+        
+    def rotate_counterclockwise_90(self):
+        matrix = self.flip_left_right()
+        matrix.transpose()
+        return self
+    
+    def rotate_180(self):
+        matrix = self.flip_up_down()
+        matrix.flip_left_right()
+        return self
+        
+    def rotated_clockwise_90(self):
+        matrix_copy = MyMatrix(copy.deepcopy(self.__data))
+        return matrix_copy.rotate_clockwise_90()
+    
+    def rotated_counterclockwise_90(self):
+        matrix_copy = MyMatrix(copy.deepcopy(self.__data))
+        return matrix_copy.rotate_counterclockwise_90()
+        
+    def rotated_180(self):
+        matrix_copy = MyMatrix(copy.deepcopy(self.__data))
+        return matrix_copy.rotate_180()
